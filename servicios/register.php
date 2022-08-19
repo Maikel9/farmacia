@@ -3,6 +3,8 @@
 //2: Email invalido
 //3: Contraseña incorrecta
 include('_conexion.php');
+$nomusu=$_POST['nameusur'];
+$apeusu=$_POST['apeusur'];
 $emausu=$_POST['emausur'];
 $sql="SELECT * FROM USUARIO WHERE emausu='$emausu'";
 $result=mysqli_query($con,$sql);
@@ -14,21 +16,27 @@ if ($result) {
 		$pasusu=$_POST['pasusur'];
 		$pasusu2=$_POST['pasusu2r'];
 		if ($pasusu!=$pasusu2) {
-			header('Location: ../login.php?er=3');
+			header('Location: ../registro.php?er=3');
 		}else{
-			$sql="INSERT into usuario (codusu,emausu,pasusu,estado)
-			VALUES ('','$emausu','$pasusu',1)";
-			$result=mysqli_query($con,$sql);
-			$codusu=mysqli_insert_id($con);
-			session_start();
-			$_SESSION['codusu']=$codusu;
-			$_SESSION['emausu']=$emausu;
-			$_SESSION['nomusu']='';
-			header('Location: ../');
+			if(strpos($emausu, "@") === false){
+				header('Location: ../registro.php?er=4');
+			}else{
+				$sql="INSERT into usuario (codusu,nomusu,apeusu,emausu,pasusu,estado,codrol)
+				VALUES ('','$nomusu','$apeusu','$emausu','$pasusu',1,2)";
+				$result=mysqli_query($con,$sql);
+				$codusu=mysqli_insert_id($con);
+				session_start();
+				$_SESSION['nomusu']=$nomusu;
+				$_SESSION['apeusu']=$apeusu;
+				$_SESSION['codusu']=$codusu;
+				$_SESSION['emausu']=$emausu;
+				header('Location: ../');
+			}
+			
 		}
 	}else{
-		header('Location: ../login.php?er=2');
+		header('Location: ../registro.php?er=2');
 	}
 }else{
-	header('Location: ../login.php?er=1');
+	header('Location: ../registro.php?er=1');
 }

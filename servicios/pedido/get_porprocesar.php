@@ -8,7 +8,7 @@ function estado2texto($id){
 			return 'Por procesar';
 			break;
 		case '2':
-			return 'Por pagar';
+			return 'Pagado';
 			break;
 		default:
 			break;
@@ -17,10 +17,16 @@ function estado2texto($id){
 
 $datos=[];
 $i=0;
+session_start();
+isset($_SESSION['codusu']);
+$var1 = $_SESSION['codusu'];
+$var1 += 0;
+
+
 $sql="select *,ped.estado estadoped from pedido ped
 inner join producto pro
 on ped.codpro=pro.codpro
-where ped.estado=1";
+where ped.estado=1 and ped.codusu = $var1";
 $result=mysqli_query($con,$sql);
 while($row=mysqli_fetch_array($result)){
 	$obj=new stdClass();

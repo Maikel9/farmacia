@@ -9,20 +9,30 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/estilos.css">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/estilos2.css">
 </head>
 <body>
 	<?php include("layouts/_main-header.php"); ?>
+	
 	<div class="main-content">
-		<div class="content-page">
-			<div class="title-section">Productos destacados</div>
-			<div class="products-list" id="space-list">
+	<?php include'carrusel.php'; ?>
+		<div class="content-page" >
+			<div class="title-section">Todos los productos</div>
+			<div class="products-list" id="space-list" data-aos="fade-up">
 			</div>
 		</div>
 	</div>
+
+
+	
+
 	<?php include("layouts/_footer.php"); ?>
 	<script type="text/javascript" src="js/main-scripts.js"></script>
+	
 	<script type="text/javascript">
+		
 		$(document).ready(function(){
 			$.ajax({
 				url:'servicios/producto/get_all_products.php',
@@ -57,6 +67,14 @@
 			let array=svalor.split(".");
 			return "MXN$"+array[0]+".<span>"+array[1]+"</span>";
 		}
+		
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+	
+	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	<script>
+		AOS.init();
 	</script>
 </body>
 </html>
